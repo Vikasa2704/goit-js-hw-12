@@ -1,0 +1,155 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  text-align: center;
+  padding: 10px;
+}
+
+.search-form {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.loader {
+  width: 64px;
+  height: 48px;
+  position: relative;
+  animation: split 1s ease-in infinite alternate;
+}
+
+.loader::before,
+.loader::after {
+  content: '';
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+  transform: translateX(-10px);
+  background: #ff3d00;
+  opacity: 0.75;
+  backdrop-filter: blur(20px);
+}
+
+.loader::after {
+  left: auto;
+  right: 0;
+  background: #fff;
+  transform: translateX(10px);
+}
+
+@keyframes split {
+  0%,
+  25% {
+    width: 64px;
+  }
+  100% {
+    width: 148px;
+  }
+}
+
+.is-hidden {
+  display: none;
+}
+
+.search-box {
+  display: flex;
+  background: #fff;
+
+  padding: 32px;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  width: 272px;
+  height: 40px;
+  padding: 8px 16px 8px 16px;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 16px;
+}
+
+input:focus {
+  outline: none;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 91px;
+  height: 40px;
+  padding: 8px 16px;
+  margin-left: 8px;
+  outline: none;
+  cursor: pointer;
+  background-color: #4e75ff;
+  color: #ffffff;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: #1165e8;
+  color: #ffffff;
+  outline: none;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  width: 1440px;
+  height: 792px;
+}
+
+.photo-card {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  height: 200px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.photo-card:hover,
+.photo-card:focus {
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.4), 0 28px 30px rgba(0, 0, 0, 0.3);
+}
+
+.photo-card__image {
+  display: block;
+  object-fit: cover;
+  width: 360px;
+  height: 152px;
+}
+
+.photo-card__info {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 4px;
+  width: 360px;
+  height: 48px;
+  color: #2e2f42;
+}
+
+.photo-card__info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  gap: 4px;
+}

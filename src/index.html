@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Search App</title>
+    <link rel="stylesheet" href="https://simple-lightbox.min.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header class="header"></header>
+    <main>
+      <form class="search-form search-box" id="search-form">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Enter your search query"
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      <!-- Індикатор завантаження -->
+      <div class="loader-container">
+        <span class="loader"></span>
+      </div>
+
+      <div id="gallery" class="gallery">
+        <!-- Картки зображень будуть відображатися тут -->
+      </div>
+    </main>
+    <script src="./main.js" type="module"></script>
+  </body>
+</html>
