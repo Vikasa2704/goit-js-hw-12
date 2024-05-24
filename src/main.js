@@ -6,6 +6,10 @@ import {
   clearGallery,
   showLoader,
   hideLoader,
+  showLoadMoreBtn,
+  hideLoadMoreBtn,
+  showLoadingIndicatorBtn,
+  hideLoadingIndicatorBtn,
 } from './js/render-functions.js';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -18,20 +22,24 @@ document.addEventListener('DOMContentLoaded', function () {
   const input = document.querySelector('#search-input');
   const gallery = document.querySelector('.gallery');
   const loaderContainer = document.querySelector('.loader-container');
+  const loadMoreBtn = document.querySelector('.load-more');
+  const loaderBtn = document.querySelector('.loader-btn');
 
   // Приховуємо лоадер через секунду після завантаження сторінки
   setTimeout(() => {
     hideLoader(loaderContainer);
   }, 1000);
 
+  let searchQuery = '';
+  let page = 1;
+  let totalHits = 0;
+
   form.addEventListener('submit', onSearch);
+  loadMoreBtn.addEventListener('click', onLoadMore);
 
   function onSearch(event) {
     event.preventDefault();
-    const searchQuery = input.value.trim();
-
-    clearGallery();
-    showLoader(loaderContainer);
+    searchQuery = input.value.trim();
 
     if (searchQuery === '') {
       iziToast.error({
@@ -43,8 +51,17 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    fetchImages(searchQuery)
-      .then(images => {
+    clearGallery();
+    showLoader(loaderContainer);
+    hideLoadMoreBtn(loadMoreBtn); // Приховуємо кнопку "Load More"
+
+    fetchImages(searchQuery, page)
+      .then(data => {
+        if (!data.hits || !Array.isArray(data.hits)) {
+          throw new Error('Unexpected response format');
+        }
+
+        const images = data.hits;
         const markup = createMarkup(images);
         gallery.insertAdjacentHTML('beforeend', markup);
 
@@ -54,6 +71,13 @@ document.addEventListener('DOMContentLoaded', function () {
           captionDelay: 250,
         });
         lightbox.refresh();
+
+        totalHits = data.totalHits;
+
+        // Показуємо кнопку "Load More" якщо є більше результатів
+        if (totalHits > gallery.children.length) {
+          showLoadMoreBtn(loadMoreBtn);
+        }
 
         input.value = ''; // Очищення поля вводу форми після успішного пошуку
       })
@@ -66,5 +90,54 @@ document.addEventListener('DOMContentLoaded', function () {
         input.value = ''; // Очищення поля вводу форми при помилці
       })
       .finally(() => hideLoader(loaderContainer));
+  }
+
+  function onLoadMore() {
+    page += 1;
+    showLoadingIndicatorBtn(loaderBtn);
+    fetchImages(searchQuery, page)
+      .then(data => {
+        hideLoadingIndicatorBtn(loaderBtn);
+
+        if (!data.hits || !Array.isArray(data.hits)) {
+          throw new Error('Unexpected response format');
+        }
+
+        const images = data.hits;
+        const markup = createMarkup(images);
+        gallery.insertAdjacentHTML('beforeend', markup);
+
+        // Оновлення SimpleLightbox після додавання нових зображень
+        const lightbox = new SimpleLightbox('.gallery a', {
+          captionsData: 'alt',
+          captionDelay: 250,
+        });
+        lightbox.refresh();
+
+        // Показуємо кнопку "Load More" якщо є більше результатів
+        if (totalHits > gallery.children.length) {
+          showLoadMoreBtn(loadMoreBtn);
+        } else {
+          hideLoadMoreBtn(loadMoreBtn);
+        }
+
+        smoothScroll();
+      })
+      .catch(error => {
+        hideLoadingIndicatorBtn(loaderBtn);
+        iziToast.error({
+          title: 'Error',
+          message: error.message,
+        });
+      });
+  }
+
+  function smoothScroll() {
+    const { height: cardHeight } =
+      gallery.firstElementChild.getBoundingClientRect();
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
   }
 });
