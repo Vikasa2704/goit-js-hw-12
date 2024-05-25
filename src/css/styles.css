@@ -2,17 +2,15 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.header {
-  text-align: center;
-  padding: 10px;
-}
 .container {
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
-  padding-bottom: 50px;
+  align-items: center;
 }
+
 .search-form {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .loader-container {
@@ -68,7 +66,6 @@ body {
 .search-box {
   display: flex;
   background: #fff;
-
   padding: 32px;
   align-items: center;
   justify-content: center;
@@ -76,11 +73,12 @@ body {
 
 input {
   width: 272px;
-  height: 40px;
-  padding: 8px 16px 8px 16px;
+  outline: none;
   border-radius: 4px;
-  background: #fff;
-  font-size: 16px;
+  border: 1px solid #808080;
+  background-color: #fff;
+  padding: 8px 16px;
+  transition: border 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 input:focus {
@@ -91,8 +89,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 91px;
-  height: 40px;
+  border: none;
+  /* width: 91px;
+  height: 40px; */
   padding: 8px 16px;
   margin-left: 8px;
   outline: none;
@@ -100,10 +99,11 @@ button {
   background-color: #4e75ff;
   color: #ffffff;
   border-radius: 8px;
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 button:hover {
-  background-color: #1165e8;
+  background-color: #6c8cff;
   color: #ffffff;
   outline: none;
 }
@@ -113,15 +113,13 @@ button:hover {
   flex-wrap: wrap;
   justify-content: center;
   gap: 24px;
-  width: 1440px;
-  height: 792px;
+  width: 100%;
 }
 
 .photo-card {
   display: flex;
   flex-direction: column;
   width: 360px;
-  height: 200px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -133,16 +131,15 @@ button:hover {
 .photo-card__image {
   display: block;
   object-fit: cover;
-  width: 360px;
-  height: 152px;
+  width: 100%;
+  height: 200px;
 }
 
 .photo-card__info {
   display: flex;
   justify-content: space-evenly;
   gap: 4px;
-  width: 360px;
-  height: 48px;
+  width: 100%;
   color: #2e2f42;
 }
 
@@ -189,30 +186,30 @@ button:hover {
     transform: rotate(360deg);
   }
 }
+
 .load-more {
   display: flex;
   align-items: center;
-  margin: 0 auto;
+  margin: 20px auto;
   border: 2px solid #ccc;
-  border-radius: 4px;
-  padding: 10px 20px;
+  border-radius: 8px;
+  padding: 8px 16px;
   cursor: pointer;
   font-family: inherit;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 16px;
   line-height: 1.4;
-  background-color: #feff00;
-  color: rgba(17, 101, 232, 1);
+  background-color: #4e75ff;
+  color: #ffffff;
   transition: background-color color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .load-more:hover,
 .load-more:focus {
-  color: #feff00;
-  background-color: rgba(17, 101, 232, 1);
-  border-radius: 4px;
+  color: #ffffff;
+  background-color: #4e75ff;
+  border-radius: 8px;
 }
-
-.is-hidden {
-  visibility: hidden;
+.hidden {
+  display: none;
 }

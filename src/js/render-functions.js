@@ -1,29 +1,36 @@
 // js/render-functions.js
 
+// Показує індикатор завантаження
 export function showLoader(loaderContainer) {
   loaderContainer.style.display = 'flex';
 }
 
+// Приховує індикатор завантаження
 export function hideLoader(loaderContainer) {
   loaderContainer.style.display = 'none';
 }
 
+// Показує кнопку "Завантажити ще"
 export function showLoadMoreBtn(loadMoreBtn) {
   loadMoreBtn.classList.remove('hidden');
 }
 
+// Приховує кнопку "Завантажити ще"
 export function hideLoadMoreBtn(loadMoreBtn) {
   loadMoreBtn.classList.add('hidden');
 }
 
+// Показує індикатор завантаження на кнопці
 export function showLoadingIndicatorBtn(loaderBtn) {
   loaderBtn.classList.remove('hidden');
 }
 
+// Приховує індикатор завантаження на кнопці
 export function hideLoadingIndicatorBtn(loaderBtn) {
   loaderBtn.classList.add('hidden');
 }
 
+// Створює розмітку для зображень
 export function createMarkup(images) {
   return images
     .map(
@@ -52,6 +59,7 @@ export function createMarkup(images) {
     .join('');
 }
 
+// Очищує галерею
 export function clearGallery() {
   const gallery = document.querySelector('.gallery');
   gallery.innerHTML = '';
