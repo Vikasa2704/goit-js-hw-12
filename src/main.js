@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const gallery = document.querySelector('.gallery');
   const loaderContainer = document.querySelector('.loader-container');
   const loadMoreBtn = document.querySelector('.load-more');
-  const loaderBtn = document.querySelector('.loader-btn');
 
   hideLoadMoreBtn(loadMoreBtn); // Спочатку приховуємо кнопку Load More
   hideLoader(loaderContainer); // Спочатку приховуємо індикатор завантаження
