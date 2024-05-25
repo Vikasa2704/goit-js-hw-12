@@ -19,7 +19,6 @@ export function showLoadMoreBtn(loadMoreBtn) {
 export function hideLoadMoreBtn(loadMoreBtn) {
   loadMoreBtn.classList.add('hidden');
 }
-
 // Показує індикатор завантаження на кнопці
 export function showLoadingIndicatorBtn(loaderBtn) {
   loaderBtn.classList.remove('hidden');
