@@ -12,6 +12,9 @@ body {
 .search-form {
   text-align: center;
 }
+.hidden {
+  display: none;
+}
 
 .loader-container {
   display: flex;
