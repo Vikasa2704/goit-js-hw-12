@@ -6,8 +6,6 @@ import {
   hideLoader,
   showLoadMoreBtn,
   hideLoadMoreBtn,
-  showLoadingIndicatorBtn,
-  hideLoadingIndicatorBtn,
 } from './js/render-functions.js';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -69,7 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
           iziToast.error({
             title: 'Error',
-            message: 'No images found!',
+            message:
+              'Sorry, there are no images matching your search query. Please try again!',
           });
         }
         input.value = '';
